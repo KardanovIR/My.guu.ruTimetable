@@ -4,4 +4,6 @@
     <color name="corporate_blue_dark">#002f65</color>
     <color name="sky_blue">#ff94ceff</color>
     <color name="white">#ffffff</color>
+
+    <color name="grey">#ffdedcd6</color>
 </resources>

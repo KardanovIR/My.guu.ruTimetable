@@ -12,6 +12,7 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -33,6 +34,7 @@ import android.widget.Toast;
 import java.io.InputStream;
 
 import ru.guu.my.myguuruclient.data.TimetableContract;
+import ru.guu.my.myguuruclient.utilities.DownloadImageTask;
 
 /**
  * Created by Инал on 15.03.2015.
@@ -63,6 +65,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     static final int COL_ORGANIZATIONAL_UNIT = 17;
     private static final String SHARE_TAG = " #my.guu.ru";
     private static final int DETAIL_LOADER = 0;
+
     private static final String[] __COLUMNS = {
             TimetableContract.ClassEntry.TABLE_NAME + "." + TimetableContract.ClassEntry._ID,
             TimetableContract.ClassEntry.COLUMN_BUILDING_NUMBER,
@@ -85,7 +88,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     };
     private static String mClassStr;
     ShareActionProvider mShareActionProvider;
-    private Uri mUri;
+    public Uri mUri;
     private ImageView mAvatarView;
     private TextView mSubjectNameTView;
     private TextView mDayNameTView;
@@ -100,6 +103,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     public DetailFragment() {
         setHasOptionsMenu(true);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -125,13 +129,11 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         return rootView;
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         getLoaderManager().initLoader(DETAIL_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
     }
-
 
     private Intent createShareActionIntent() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -174,6 +176,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         String professorRole = data.getString(COL_ROLE);
         String professorOU = data.getString(COL_ORGANIZATIONAL_UNIT);
         String professorAvatar = data.getString(COL_AVATAR);
+        final long professorId = data.getLong(COL_PROFESSOR_ID);
 
         mDayNameTView.setText(dayName);
         mSubjectNameTView.setText(subjectName);
@@ -187,7 +190,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mProfessorLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "hello", Toast.LENGTH_LONG).show();
+                    ((Callback) getActivity())
+                            .onProfessorClick(TimetableContract.ProfessorEntry.buildProfessorUri(professorId));
             }
         });
 
@@ -215,52 +219,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     }
 
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = mAvatarView;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            final int imgMaxHeight = 150;
-            final int imgMaxWidth = 300;
-            float ratioBitmap = (float) result.getWidth() / (float) result.getHeight();
-            float ratioMax = (float) imgMaxWidth / (float) imgMaxHeight;
-            int finalWidth = imgMaxWidth;
-            int finalHeight = imgMaxHeight;
-            if (ratioMax > 1) {
-                finalWidth = (int) ((float)imgMaxHeight * ratioBitmap);
-            } else {
-                finalHeight = (int) ((float)imgMaxWidth / ratioBitmap);
-            }
-            Bitmap output = Bitmap.createBitmap(result.getWidth(),
-                    result.getHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(output);
-            final Paint paint = new Paint();
-            final Rect rect = new Rect(0, 0, result.getWidth(),
-                    result.getHeight());
-            paint.setAntiAlias(true);
-            canvas.drawARGB(0, 0, 0, 0);
-            canvas.drawCircle(result.getWidth() / 2,
-                    result.getHeight() / 2, result.getWidth() / 2, paint);
-            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-            canvas.drawBitmap(result, rect, rect, paint);
-            output = Bitmap.createScaledBitmap(output, finalWidth, finalHeight, true);
-            bmImage.setImageBitmap(output);
-        }
+    public interface Callback {
+        public void onProfessorClick(Uri professorUri);
     }
 }

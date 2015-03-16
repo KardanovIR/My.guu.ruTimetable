@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import ru.guu.my.myguuruclient.sync.TimetableSyncAdapter;
 
 
-public class TimetableActivity extends ActionBarActivity implements TimetableFragment.Callback {
+public class TimetableActivity extends ActionBarActivity implements TimetableFragment.Callback, DetailFragment.Callback {
 
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
     public static Boolean mTwoPane;
@@ -20,25 +20,19 @@ public class TimetableActivity extends ActionBarActivity implements TimetableFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timetable);
         mTwoPane = findViewById(R.id.detail_container) != null;
-
         if (mTwoPane) {
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.detail_container, new DetailFragment(), DETAILFRAGMENT_TAG)
                         .commit();
             }
-
         } else {
             getSupportActionBar().setElevation(0f);
         }
+
         TimetableSyncAdapter.initializeSyncAdapter(this);
     }
 
-    @Override
-    protected void onResume() {
-        TimetableFragment ttf = (TimetableFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_timetable);
-        super.onResume();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,5 +80,14 @@ public class TimetableActivity extends ActionBarActivity implements TimetableFra
                     .setData(classUri);
             startActivity(intent);
         }
+    }
+
+
+    @Override
+    public void onProfessorClick(Uri professorUri) {
+        Uri uri = professorUri;
+        Intent intent = new Intent(this, ProfessorActivity.class)
+                .setData(professorUri);
+        startActivity(intent);
     }
 }

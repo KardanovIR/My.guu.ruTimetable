@@ -75,11 +75,6 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
         super.onSaveInstanceState(outState);
     }
 
-
-    private void updateTimetable() {
-        TimetableSyncAdapter.syncImmediately(getActivity());
-    }
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -137,7 +132,7 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mTTAdapter.swapCursor(data);
         if (mPosition != ListView.INVALID_POSITION) {
-            mListView.setSelection(mPosition);
+            mListView.smoothScrollToPosition(mPosition);
         }
     }
 

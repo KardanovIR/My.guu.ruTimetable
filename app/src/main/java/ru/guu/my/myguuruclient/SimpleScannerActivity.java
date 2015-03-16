@@ -25,7 +25,7 @@ public class SimpleScannerActivity extends ActionBarActivity implements ZBarScan
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mScannerView = new ZBarScannerView(this);    // Programmatically initialize the scanner view
         List<BarcodeFormat> formats = new ArrayList<>();
         formats.add(BarcodeFormat.QRCODE);

@@ -22,13 +22,16 @@
 
     <style name="ProfessorAttributeLabel">
         <item name="android:layout_weight">1</item>
-        <item name="android:textSize">@dimen/abc_text_size_body_2_material</item>
+        <item name="android:textSize">@dimen/abc_text_size_small_material</item>
         <item name="android:gravity">left</item>
+        <item name="android:textColor">@color/corporate_blue_dark</item>
+        <item name="android:paddingTop">3dp</item>
     </style>
 
     <style name="ProfessorAttributeValue">
         <item name="android:layout_weight">1</item>
-        <item name="android:textSize">@dimen/abc_text_size_body_1_material</item>
+        <item name="android:textSize">@dimen/abc_text_size_large_material</item>
+        <item name="android:textColor">@color/abc_primary_text_material_light</item>
+        <item name="android:paddingTop">1dp</item>
     </style>
-
 </resources>

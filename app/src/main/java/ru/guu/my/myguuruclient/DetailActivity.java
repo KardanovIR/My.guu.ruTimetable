@@ -1,7 +1,9 @@
 package ru.guu.my.myguuruclient;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -9,8 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class DetailActivity extends ActionBarActivity {
+public class DetailActivity extends ActionBarActivity implements DetailFragment.Callback{
 
+    private Bundle args;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +21,7 @@ public class DetailActivity extends ActionBarActivity {
         setContentView(R.layout.activity_detail);
         if (savedInstanceState == null) {
 
-            Bundle args = new Bundle();
+            args = new Bundle();
             args.putParcelable(DetailFragment.DETAIL_URI, getIntent().getData());
 
             DetailFragment fragment = new DetailFragment();
@@ -28,8 +31,20 @@ public class DetailActivity extends ActionBarActivity {
                     .add(R.id.detail_container, fragment)
                     .commit();
         }
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(DetailFragment.DETAIL_URI, args);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        args = savedInstanceState.getParcelable(DetailFragment.DETAIL_URI);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,4 +74,13 @@ public class DetailActivity extends ActionBarActivity {
     public Intent getParentActivityIntent() {
         return super.getParentActivityIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
+
+
+    @Override
+    public void onProfessorClick(Uri professorUri) {
+        Intent intent = new Intent(this, ProfessorActivity.class)
+                .setData(professorUri);
+        startActivity(intent);
+    }
+
 }

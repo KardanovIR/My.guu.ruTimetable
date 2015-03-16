@@ -12,4 +12,17 @@
     <string name="title_activity_detail">Детальная информация</string>
     <string name="title_activity_simple_scanner">Скнировать QR для авторизации</string>
     <string name="title_activity_timetable">Расписание</string>
+    <string name="pref_show_notifications_false">Не показывать</string>
+    <string name="pref_last_notification"></string>
+    <string name="format_notification">Расписание обновлено</string>
+    <string name="pref_show_notifications_true">Показывать</string>
+    <string name="professor_email_label">Email</string>
+    <string name="professor_facebook_label">Facebook</string>
+    <string name="professor_name_label">Имя</string>
+    <string name="professor_offile_tel_label">Рабочий телефон</string>
+    <string name="professor_organizational_unit_label">Подразделение</string>
+    <string name="professor_phone_number_label">Мобильный телефон</string>
+    <string name="professor_role_label">Должность</string>
+    <string name="professor_room_label">Кабинет</string>
+    <string name="title_activity_professor">Информация о преподавателе</string>
 </resources>

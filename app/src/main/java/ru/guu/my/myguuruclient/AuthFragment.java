@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -44,6 +45,10 @@ public class AuthFragment extends Fragment {
     }
 
     public static String getToken() {
+        //Added for AVD
+        if (Build.DEVICE.equals("generic_x86")){
+            return "f2e8f695264e35ea8d43a36112fd69c62b33dc1a53ebd087174e7bcf043744ccb3eab19e3c216b842444d891084bcc1964fba9886daae0ba6505439d7cd7c7a7";
+        }
         final ObscuredSharedPreferences obsSharedPrefs = new ObscuredSharedPreferences(mActiviy,
                 mActiviy.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE));
         String token = obsSharedPrefs.getString(TOKEN_STORAGE_KEY, null);

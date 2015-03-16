@@ -1,5 +1,17 @@
 package ru.guu.my.myguuruclient;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.ImageView;
+
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,4 +42,8 @@ public class Utils {
         int day = calendar.get(Calendar.DAY_OF_WEEK);
         return day - 1; //Sunday == 0, Saturday == 6
     }
+
+
+
+
 }

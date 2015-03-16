@@ -43,7 +43,7 @@ import ru.guu.my.myguuruclient.data.TimetableContract;
 
 public class TimetableSyncAdapter extends AbstractThreadedSyncAdapter {
 
-    public static final int SYNC_INTERVAL = 30; //60 * 180;
+    public static final int SYNC_INTERVAL = 60 * 60 * 24;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL / 3;
 
     private static final long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
@@ -107,17 +107,21 @@ public class TimetableSyncAdapter extends AbstractThreadedSyncAdapter {
      * @param context The context used to access the account service
      * @return a fake account.
      */
-    public static Account getSyncAccount(Context context) {
+    public static Account getSyncAccount(Context context) {// Get an instance of the Android account manager
         AccountManager accountManager =
                 (AccountManager) context.getSystemService(Context.ACCOUNT_SERVICE);
 
+        // Create the account type and default account
         Account newAccount = new Account(
                 context.getString(R.string.app_name), context.getString(R.string.sync_account_type));
 
-        if (null == accountManager.getPassword(newAccount)) {
+        // If the password doesn't exist, the account doesn't exist
+        if ( null == accountManager.getPassword(newAccount) ) {
+
             if (!accountManager.addAccountExplicitly(newAccount, "", null)) {
                 return null;
             }
+
             onAccountCreated(newAccount, context);
         }
         return newAccount;
@@ -311,7 +315,6 @@ public class TimetableSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
 
-        Log.v(LOG_TAG, "PERFORM!!!!!!!!!!");
         String tokenQuery = AuthFragment.getToken();
 
         HttpURLConnection urlConnection = null;
@@ -375,6 +378,5 @@ public class TimetableSyncAdapter extends AbstractThreadedSyncAdapter {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
         }
-        return;
     }
 }

@@ -40,7 +40,7 @@
     <!-- SyncAdapter related -->
     <string name="sync_account_type" translatable="false">my.guu.ru</string>
     <string name="content_authority" translatable="false">ru.guu.my.myguuru</string>
-    <string name="title_activity_professor">ProfessorActivity</string>
+    <string name="title_activity_professor">Professor details</string>
     <string name="professor_name_label">Name</string>
     <string name="professor_email_label">Email</string>
     <string name="professor_role_label">Role</string>
@@ -52,7 +52,10 @@
     Timetable updated
     </string>
     <!-- Strings related to Notification preference -->
-    <string name="pref_last_notification">last_notification
+    <string name="pref_last_notification" translatable="false">last_notification
     </string>
+    <string name="professor_offile_tel_label">Office tel.</string>
+    <string name="professor_room_label">Room</string>
+    <string name="professor_phone_number_label">Phone number</string>
 
 </resources>

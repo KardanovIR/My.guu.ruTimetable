@@ -114,10 +114,6 @@ public class TimetableContract {
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PROFESSORS;
 
 
-
-
-
-
     }
 
 
