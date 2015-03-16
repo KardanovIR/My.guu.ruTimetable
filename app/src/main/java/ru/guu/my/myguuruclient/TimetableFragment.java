@@ -133,6 +133,8 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
         mTTAdapter.swapCursor(data);
         if (mPosition != ListView.INVALID_POSITION) {
             mListView.smoothScrollToPosition(mPosition);
+        }else{
+            mListView.setSelection(0);
         }
     }
 

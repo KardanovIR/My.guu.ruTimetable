@@ -58,4 +58,8 @@
     <string name="professor_room_label">Room</string>
     <string name="professor_phone_number_label">Phone number</string>
 
+
+<!-- Share string -->
+
+    <string name="share_message">Hey, I have class on %1$s with %2$s %3$s %4$s ( %5$s )! We have %6$s in classroom %7$s at %8$s. Go with us :) </string>
 </resources>

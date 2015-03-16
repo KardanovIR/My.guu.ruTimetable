@@ -233,7 +233,7 @@ public class ProfessorActivity extends ActionBarActivity{
             String filename = professorAvatar.substring(professorAvatar.lastIndexOf('/') + 1);
 
             if (filename.equals(TimetableContract.API_DEFAULT_AVATAR_URL)) {
-                mAvatarView.setImageResource(R.drawable.ic_action_person);
+                mAvatarView.setImageResource(R.drawable.ic_action_person_white);
             } else {
                 new DownloadImageTask(mAvatarView)
                         .execute(TimetableContract.REMOTE_BASE_URL + professorAvatar);

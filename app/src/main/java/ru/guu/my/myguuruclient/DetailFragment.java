@@ -1,6 +1,7 @@
 package ru.guu.my.myguuruclient;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -63,7 +64,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     static final int COL_AVATAR = 15;
     static final int COL_ROLE = 16;
     static final int COL_ORGANIZATIONAL_UNIT = 17;
-    private static final String SHARE_TAG = " #my.guu.ru";
+    static final int COL_USER_ID = 18;
+    public static final String SHARE_TAG = " #my.guu.ru";
     private static final int DETAIL_LOADER = 0;
 
     private static final String[] __COLUMNS = {
@@ -85,8 +87,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             TimetableContract.ProfessorEntry.COLUMN_AVATAR,
             TimetableContract.ProfessorEntry.COLUMN_ROLE,
             TimetableContract.ProfessorEntry.COLUMN_ORGANIZATIONAL_UNIT,
+            TimetableContract.ProfessorEntry.COLUMN_USER_ID
     };
-    private static String mClassStr;
+    private static String mClassDescriptionStr;
     ShareActionProvider mShareActionProvider;
     public Uri mUri;
     private ImageView mAvatarView;
@@ -139,7 +142,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, mClassStr + SHARE_TAG);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, mClassDescriptionStr + SHARE_TAG);
         return shareIntent;
     }
 
@@ -148,7 +151,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         inflater.inflate(R.menu.detailfragment, menu);
         MenuItem menuItem = menu.findItem(R.id.action_share);
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        if (mClassStr != null) {
+        if (mClassDescriptionStr != null) {
             mShareActionProvider.setShareIntent(createShareActionIntent());
         } else {
             Log.d("", "Share provider is null");
@@ -204,7 +207,17 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             new DownloadImageTask(mAvatarView)
                     .execute(TimetableContract.REMOTE_BASE_URL + professorAvatar);
         }
-
+        Resources res = getResources();
+        mClassDescriptionStr = String.format(res.getString(R.string.share_message),
+                data.getString(COL_DAY_NAME),
+                data.getString(COL_LAST_NAME),
+                data.getString(COL_FIRST_NAME),
+                data.getString(COL_MIDDLE_NAME),
+                TimetableContract.REMOTE_BASE_URL + TimetableContract.API_PATH_USER + "/" + data.getString(COL_USER_ID),
+                data.getString(COL_FORMAT_NAME),
+                data.getString(COL_ROOM),
+                Utils.getTimeRange(data.getString(COL_START_TIME), data.getString(COL_FINISH_TIME))
+                );
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareActionIntent());
         }
