@@ -8,14 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by Инал on 14.03.2015.
  */
-public class TimetableDBHelper extends SQLiteOpenHelper{
+public class TimetableDBHelper extends SQLiteOpenHelper {
 
-
-    private static final int DB_VERSION = 4;
 
     public static final String DB_NAME = "timetable.db";
+    private static final int DB_VERSION = 4;
 
-    public TimetableDBHelper(Context context){
+    public TimetableDBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
 
     }
@@ -38,7 +37,7 @@ public class TimetableDBHelper extends SQLiteOpenHelper{
                 TimetableContract.ProfessorEntry.COLUMN_ROOM + " TEXT NULL" +
                 "  );";
 
-        final String SQL_CREATE_CLASSES_TABLE = "CREATE TABLE " + TimetableContract.ClassEntry.TABLE_NAME+ " (" +
+        final String SQL_CREATE_CLASSES_TABLE = "CREATE TABLE " + TimetableContract.ClassEntry.TABLE_NAME + " (" +
                 TimetableContract.ClassEntry._ID + " INTEGER PRIMARY KEY," +
                 TimetableContract.ClassEntry.COLUMN_SUBJECT_REAL_NAME + " TEXT NOT NULL," +
                 TimetableContract.ClassEntry.COLUMN_PROFESSOR_ID + " INTEGER NOT NULL," +

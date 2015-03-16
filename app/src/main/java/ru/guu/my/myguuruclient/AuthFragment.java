@@ -34,13 +34,20 @@ import ru.guu.my.myguuruclient.utilities.ObscuredSharedPreferences;
 public class AuthFragment extends Fragment {
 
 
-    public static String PREFS_FILE_NAME = "prefs";
     public static final String TOKEN_STORAGE_KEY = "token";
+    public static String PREFS_FILE_NAME = "prefs";
     public static Button mScanQRButton = null;
     public static ProgressBar mAsyncSpinner = null;
     private static Activity mActiviy;
 
     public AuthFragment() {
+    }
+
+    public static String getToken() {
+        final ObscuredSharedPreferences obsSharedPrefs = new ObscuredSharedPreferences(mActiviy,
+                mActiviy.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE));
+        String token = obsSharedPrefs.getString(TOKEN_STORAGE_KEY, null);
+        return token;
     }
 
     @Override
@@ -59,22 +66,14 @@ public class AuthFragment extends Fragment {
         return rootView;
     }
 
-
-    public static String getToken() {
-        final ObscuredSharedPreferences obsSharedPrefs = new ObscuredSharedPreferences(mActiviy,
-                mActiviy.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE));
-        String token = obsSharedPrefs.getString(TOKEN_STORAGE_KEY, null);
-        return token;
-    }
-
-    private void checkTokenAsync(){
+    private void checkTokenAsync() {
         CheckToken checker = new CheckToken();
         checker.execute();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
-            if(resultCode == getActivity().RESULT_OK){
+            if (resultCode == getActivity().RESULT_OK) {
                 String result = data.getStringExtra("RESULT");
                 final ObscuredSharedPreferences obsSharedPrefs = new ObscuredSharedPreferences(this.getActivity(),
                         this.getActivity().getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE));
@@ -95,7 +94,7 @@ public class AuthFragment extends Fragment {
     }
 
 
-    public void showErrorToast(String text){
+    public void showErrorToast(String text) {
         Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
     }
 
@@ -109,7 +108,7 @@ public class AuthFragment extends Fragment {
             try {
                 JSONObject forecastJson = new JSONObject(JSONString);
                 return forecastJson.getBoolean(STATUS_KEY);
-            }catch (JSONException e) {
+            } catch (JSONException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
                 e.printStackTrace();
                 return null;
@@ -157,9 +156,9 @@ public class AuthFragment extends Fragment {
                 }
                 userInfoJSONStr = buffer.toString();
                 Log.v(LOG_TAG, userInfoJSONStr);
-                try{
+                try {
                     return getTokenStatusFromJSON(userInfoJSONStr);
-                }catch(JSONException e){
+                } catch (JSONException e) {
                     Log.e(LOG_TAG, userInfoJSONStr);
                     return null;
                 }
@@ -182,17 +181,17 @@ public class AuthFragment extends Fragment {
 
         protected void onPostExecute(Boolean result) {
             if (result != null) {
-                if (result == true){
+                if (result == true) {
                     startActivity(new Intent(getActivity(), TimetableActivity.class));
                     getActivity().finish();
-                }else{
-                    if (!MainActivity.active){
+                } else {
+                    if (!MainActivity.active) {
                         startActivity(new Intent(getActivity(), MainActivity.class));
                         getActivity().finish();
                     }
                     activateQRButton();
                 }
-            }else{
+            } else {
                 showErrorToast("Connection error.");
                 activateQRButton();
             }

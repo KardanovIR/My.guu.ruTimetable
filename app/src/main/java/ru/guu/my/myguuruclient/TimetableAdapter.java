@@ -8,11 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 /**
  * Created by Инал on 15.03.2015.
  */
@@ -43,7 +38,7 @@ public class TimetableAdapter extends CursorAdapter {
                 " - " +
                 cursor.getString(TimetableFragment.COL_SUBJECT_REAL_NAME) + "-" +
                 cursor.getString(TimetableFragment.COL_SUBJECT_REAL_NAME) + " in " +
-                cursor.getString(TimetableFragment.COL_SUBJECT_REAL_NAME) + "-"+
+                cursor.getString(TimetableFragment.COL_SUBJECT_REAL_NAME) + "-" +
                 cursor.getString(TimetableFragment.COL_SUBJECT_REAL_NAME);
     }
 
@@ -52,9 +47,9 @@ public class TimetableAdapter extends CursorAdapter {
     public int getItemViewType(int position) {
         Cursor cursor = (Cursor) getItem(position);
         int viewType;
-        if (cursor != null){
-            viewType = cursor.getInt(TimetableFragment.COL_DAY_NUMBER) == (Utils.getTodayWeekDayNumber()+2) ? VIEW_NEAREST_CLASS : VIEW_REGULAR_CLASS;
-        }else{
+        if (cursor != null) {
+            viewType = cursor.getInt(TimetableFragment.COL_DAY_NUMBER) == (Utils.getTodayWeekDayNumber() + 2) ? VIEW_NEAREST_CLASS : VIEW_REGULAR_CLASS;
+        } else {
             viewType = VIEW_REGULAR_CLASS;
         }
         return viewType;
@@ -76,13 +71,13 @@ public class TimetableAdapter extends CursorAdapter {
     }
 
 
-    public static class ViewHolder{
+    public static class ViewHolder {
         public final TextView dayAbbrTView;
         public final TextView timeTView;
         public final TextView subjectNameTView;
         public final TextView classRoomTView;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             dayAbbrTView = (TextView) view.findViewById(R.id.list_item_day_abbr_textview);
             timeTView = (TextView) view.findViewById(R.id.list_item_time_textview);
             subjectNameTView = (TextView) view.findViewById(R.id.list_item_subject_name_textview);

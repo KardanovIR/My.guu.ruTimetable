@@ -16,24 +16,26 @@
             android:gravity="center"
             android:textSize="@dimen/abc_text_size_large_material" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:padding="16dp">
-        <TextView
-            android:id="@+id/detail_day_name_textview"
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:gravity="center"/>
-        <TextView
-            android:id="@+id/detail_time_textview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:gravity="center"/>
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/detail_day_name_textview"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/detail_time_textview"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center" />
         </LinearLayout>
 
 
@@ -43,7 +45,7 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:gravity="center"
-            android:textSize="@dimen/abc_text_size_body_1_material"/>
+            android:textSize="@dimen/abc_text_size_body_1_material" />
 
 
         <TextView
@@ -55,37 +57,37 @@
             android:textSize="@dimen/abc_text_size_body_2_material" />
 
         <LinearLayout
-            android:clickable="true"
-            android:focusable="true"
+            android:id="@+id/professor_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:id="@+id/professor_layout"
             android:background="@drawable/touch_selector"
+            android:clickable="true"
+            android:focusable="true"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <ImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/detail_avatar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitCenter"
-                    android:paddingRight="5dp"
+                    android:adjustViewBounds="true"
                     android:paddingLeft="5dp"
-                    android:adjustViewBounds= "true"/>
+                    android:paddingRight="5dp"
+                    android:scaleType="fitCenter" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <TextView
@@ -93,19 +95,19 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="@dimen/abc_text_size_medium_material"/>
+                    android:textSize="@dimen/abc_text_size_medium_material" />
 
                 <TextView
                     android:id="@+id/detail_organizational_unit"
                     android:layout_width="fill_parent"
-                    android:gravity="center"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/detail_role"
                     android:layout_width="fill_parent"
-                    android:gravity="center"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:gravity="center" />
             </LinearLayout>
         </LinearLayout>
 

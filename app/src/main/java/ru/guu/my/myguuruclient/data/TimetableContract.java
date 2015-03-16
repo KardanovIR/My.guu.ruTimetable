@@ -2,7 +2,6 @@ package ru.guu.my.myguuruclient.data;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;
-import android.content.UriMatcher;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -27,11 +26,7 @@ public class TimetableContract {
     public static final String PATH_PROFESSORS = "professors";
 
 
-
-
-
-
-    public static final class ClassEntry implements BaseColumns{
+    public static final class ClassEntry implements BaseColumns {
 
         public static final String TABLE_NAME = "classes";
 
@@ -49,25 +44,19 @@ public class TimetableContract {
         public static final String COLUMN_FORMAT_NAME = "format_name";
 
 
-
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_CLASSES).build();
 
-        public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CLASSES;
-
-        public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CLASSES;
-
-
         public static Uri buildClassesUri() {
             return CONTENT_URI;
-        }
+        }        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CLASSES;
 
         public static Uri buildClassesWithDate(String dayNumber, long date) {
             return CONTENT_URI.buildUpon().appendPath(dayNumber)
                     .appendPath(Long.toString(date)).build();
-        }
+        }        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CLASSES;
 
         public static long getIdFromUri(Uri uri) {
             List<String> segs = uri.getPathSegments();
@@ -86,9 +75,13 @@ public class TimetableContract {
         public static Uri buildClassUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
+
+
+
+
     }
 
-    public static final class ProfessorEntry implements BaseColumns{
+    public static final class ProfessorEntry implements BaseColumns {
         public static final String TABLE_NAME = "professors";
 
 
@@ -106,29 +99,26 @@ public class TimetableContract {
         public static final String COLUMN_USER_ID = "user_id";
 
 
-
-
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_PROFESSORS).build();
 
-        public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PROFESSORS;
-
-        public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PROFESSORS;
-
-
         public static Uri buildProfessorUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
-        }
-
+        }        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PROFESSORS;
 
         public static long getProfessorIdFromUri(Uri uri) {
             List<String> segs = uri.getPathSegments();
             return Long.parseLong(uri.getPathSegments().get(1));
-        }
-    }
+        }        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PROFESSORS;
 
+
+
+
+
+
+    }
 
 
 }

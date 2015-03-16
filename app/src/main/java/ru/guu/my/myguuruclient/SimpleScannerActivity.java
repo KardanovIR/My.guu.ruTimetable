@@ -1,9 +1,9 @@
 package ru.guu.my.myguuruclient;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,8 +53,8 @@ public class SimpleScannerActivity extends ActionBarActivity implements ZBarScan
     public void handleResult(Result rawResult) {
         // Do something with the result here
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("RESULT",rawResult.getContents());
-        setResult(RESULT_OK,returnIntent);
+        returnIntent.putExtra("RESULT", rawResult.getContents());
+        setResult(RESULT_OK, returnIntent);
         finish();
         finish();
     }
@@ -66,7 +66,6 @@ public class SimpleScannerActivity extends ActionBarActivity implements ZBarScan
         getMenuInflater().inflate(R.menu.menu_simple_scanner, menu);
         return true;
     }
-
 
 
     @Override

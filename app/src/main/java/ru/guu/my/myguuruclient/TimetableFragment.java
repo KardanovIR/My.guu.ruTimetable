@@ -4,14 +4,13 @@ package ru.guu.my.myguuruclient;
  * Created by Инал on 14.03.2015.
  */
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,26 +18,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.content.CursorLoader;
 
 import ru.guu.my.myguuruclient.data.TimetableContract;
 import ru.guu.my.myguuruclient.sync.TimetableSyncAdapter;
 
 public class TimetableFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    public interface Callback{
-        public void onItemSelected(Uri classUri);
-    }
-
-    private TimetableAdapter mTTAdapter;
+    static final int COL_CLASS_ID = 0;
+    static final int COL_CLASS_NUMBER = 1;
+    static final int COL_BUILDING_NUMBER = 2;
+    static final int COL_FINISH_TIME = 3;
+    static final int COL_DAY_ABBR = 4;
+    static final int COL_DAY_NUMBER = 5;
+    static final int COL_PROFESSOR_ID = 6;
+    static final int COL_START_TIME = 7;
+    static final int COL_SUBJECT_REAL_NAME = 8;
+    static final int COL_ROOM = 9;
+    static final int COL_DAY_NAME = 10;
     private static final int TIMETABLE_LOADER_ID = 0;
-    private int mPosition;
-    private String mToken;
-    private final String SELECTED_KEY = "LIST_VIEW_POSITION";
-    private ListView mListView;
-
     private static final String[] __COLUMNS = {
             TimetableContract.ClassEntry.TABLE_NAME + "." + TimetableContract.ClassEntry._ID,
             TimetableContract.ClassEntry.COLUMN_CLASS_NUMBER,
@@ -53,26 +50,17 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
             TimetableContract.ClassEntry.COLUMN_DAY_NAME,
             TimetableContract.ClassEntry.COLUMN_FORMAT_NAME,
     };
-
-    static final int COL_CLASS_ID = 0;
-    static final int COL_CLASS_NUMBER = 1;
-    static final int COL_BUILDING_NUMBER = 2;
-    static final int COL_FINISH_TIME = 3;
-    static final int COL_DAY_ABBR = 4;
-    static final int COL_DAY_NUMBER = 5;
-    static final int COL_PROFESSOR_ID = 6;
-    static final int COL_START_TIME = 7;
-    static final int COL_SUBJECT_REAL_NAME = 8;
-    static final int COL_ROOM = 9;
-    static final int COL_DAY_NAME = 10;
-
-
+    private final String SELECTED_KEY = "LIST_VIEW_POSITION";
+    private TimetableAdapter mTTAdapter;
+    private int mPosition;
+    private String mToken;
+    private ListView mListView;
     public TimetableFragment() {
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        if (mPosition != ListView.INVALID_POSITION){
+        if (mPosition != ListView.INVALID_POSITION) {
             outState.putInt(SELECTED_KEY, mPosition);
         }
         super.onSaveInstanceState(outState);
@@ -120,7 +108,7 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
             }
         });
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_KEY)){
+        if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_KEY)) {
             mPosition = savedInstanceState.getInt(SELECTED_KEY);
         }
 
@@ -134,7 +122,6 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
         getLoaderManager().initLoader(TIMETABLE_LOADER_ID, null, this);
         super.onActivityCreated(savedInstanceState);
     }
-
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -152,10 +139,10 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mTTAdapter.swapCursor(data);
-        if (mPosition != ListView.INVALID_POSITION){
+        if (mPosition != ListView.INVALID_POSITION) {
             mListView.setSelection(mPosition);
-        }else{
-            if (data.getCount() != ListView.INVALID_POSITION){
+        } else {
+            if (data.getCount() != ListView.INVALID_POSITION) {
                 mListView.setSelection(data.getCount());
             }
         }
@@ -164,5 +151,9 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mTTAdapter.swapCursor(null);
+    }
+
+    public interface Callback {
+        public void onItemSelected(Uri classUri);
     }
 }

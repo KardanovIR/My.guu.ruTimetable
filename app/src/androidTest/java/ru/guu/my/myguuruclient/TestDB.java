@@ -45,7 +45,7 @@ public class TestDB extends AndroidTestCase {
         // verify that the tables have been created
         do {
             tableNameHashSet.remove(c.getString(0));
-        } while( c.moveToNext() );
+        } while (c.moveToNext());
 
         assertTrue("Error: database was created without both tables",
                 tableNameHashSet.isEmpty());
@@ -76,14 +76,14 @@ public class TestDB extends AndroidTestCase {
         do {
             String columnName = c.getString(columnNameIndex);
             professorColumnHashSet.remove(columnName);
-        } while(c.moveToNext());
+        } while (c.moveToNext());
 
         assertTrue("Error: The database doesn't contain all of the required columns",
                 professorColumnHashSet.isEmpty());
         db.close();
     }
 
-    public long testProfessorsTable(){
+    public long testProfessorsTable() {
         TimetableDBHelper dbHelper = new TimetableDBHelper(mContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -105,20 +105,20 @@ public class TestDB extends AndroidTestCase {
         );
 
 
-        assertTrue( "Error: No Records returned", cursor.moveToFirst() );
+        assertTrue("Error: No Records returned", cursor.moveToFirst());
 
         TestUtilities.validateCurrentRecord("Error: Query Validation Failed",
                 cursor, testValues);
 
-        assertFalse( "Error: More than one record returned from query",
-                cursor.moveToNext() );
+        assertFalse("Error: More than one record returned from query",
+                cursor.moveToNext());
 
         cursor.close();
         db.close();
         return professorRowId;
     }
 
-    public void testClassesTable(){
+    public void testClassesTable() {
 
         TimetableDBHelper dbHelper = new TimetableDBHelper(mContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -141,13 +141,13 @@ public class TestDB extends AndroidTestCase {
         );
 
 
-        assertTrue( "Error: No Records returned", cursor.moveToFirst() );
+        assertTrue("Error: No Records returned", cursor.moveToFirst());
 
         TestUtilities.validateCurrentRecord("Error: Query Validation Failed",
                 cursor, classValues);
 
-        assertFalse( "Error: More than one record returned from query",
-                cursor.moveToNext() );
+        assertFalse("Error: More than one record returned from query",
+                cursor.moveToNext());
 
         cursor.close();
         db.close();

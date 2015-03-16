@@ -15,9 +15,6 @@ import ru.guu.my.myguuruclient.data.TimetableContract;
 public class TestUtilities extends AndroidTestCase {
 
 
-
-
-
     static ContentValues createDemoClass(long professorRowId) {
         ContentValues testValues = new ContentValues();
         testValues.put(TimetableContract.ClassEntry.COLUMN_SUBJECT_REAL_NAME, "IT management");
@@ -36,7 +33,7 @@ public class TestUtilities extends AndroidTestCase {
     }
 
 
-    static ContentValues createDemoProfessor(){
+    static ContentValues createDemoProfessor() {
         ContentValues testValues = new ContentValues();
         testValues.put(TimetableContract.ProfessorEntry.COLUMN_AD_LOGIN, "test@guu.ru");
         testValues.put(TimetableContract.ProfessorEntry.COLUMN_AVATAR, "");

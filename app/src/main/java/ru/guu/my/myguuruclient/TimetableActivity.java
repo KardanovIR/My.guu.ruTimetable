@@ -2,20 +2,16 @@ package ru.guu.my.myguuruclient;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 
-public class TimetableActivity extends ActionBarActivity implements TimetableFragment.Callback{
+public class TimetableActivity extends ActionBarActivity implements TimetableFragment.Callback {
 
-    public static Boolean mTwoPane;
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
+    public static Boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +19,14 @@ public class TimetableActivity extends ActionBarActivity implements TimetableFra
         setContentView(R.layout.activity_timetable);
         mTwoPane = findViewById(R.id.detail_container) != null;
 
-        if (mTwoPane){
+        if (mTwoPane) {
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.detail_container, new DetailFragment(), DETAILFRAGMENT_TAG)
                         .commit();
             }
 
-        }else{
+        } else {
             getSupportActionBar().setElevation(0f);
         }
 
@@ -60,7 +56,7 @@ public class TimetableActivity extends ActionBarActivity implements TimetableFra
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
-        }else if (id == R.id.action_logout){
+        } else if (id == R.id.action_logout) {
             MainActivity.logout(this);
             startActivity(new Intent(this, MainActivity.class));
             finish();
@@ -72,7 +68,7 @@ public class TimetableActivity extends ActionBarActivity implements TimetableFra
 
     @Override
     public void onItemSelected(Uri classUri) {
-        if (mTwoPane){
+        if (mTwoPane) {
             Bundle args = new Bundle();
             args.putParcelable(DetailFragment.DETAIL_URI, classUri);
 
@@ -83,7 +79,7 @@ public class TimetableActivity extends ActionBarActivity implements TimetableFra
                     .replace(R.id.detail_container, frag, DETAILFRAGMENT_TAG)
                     .commit();
 
-        }else{
+        } else {
             Intent intent = new Intent(this, DetailActivity.class)
                     .setData(classUri);
             startActivity(intent);
