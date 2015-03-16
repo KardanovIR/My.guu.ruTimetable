@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/corporate_blue</item>
+        <item name="colorPrimaryDark">@color/corporate_blue_dark</item>
+    </style>
+
+    <style name="TimetableTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Timetable.NoTitle</item>
+    </style>
+
+    <style name="SettingsTheme" parent="AppTheme" />
+    <style name="ScannerTheme" parent="AppTheme" />
+
+    <style name="ActionBar.Solid.Timetable.NoTitle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="displayOptions">useLogo|showHome</item>
+        <item name="logo">@drawable/ic_logo</item>
+    </style>
+
+    <style name="TimetableListStyle"/>
+
+</resources>

@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">My.guu.ru Timetable</string>
+    <string name="hello_world">Hello world!</string>
+
+<!-- Elements -->
+<string name="login_button_label">Checking auth data ...</string>
+
+<!-- Activity titles -->
+<string name="title_activity_simple_scanner">Scan QR to log in</string>
+<string name="title_activity_timetable">Timetable</string>
+<string name="title_activity_detail">Detail class info</string>
+<string name="title_activity_settings">Settings</string>
+
+<!-- Actions -->
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Log out</string>
+    <string name="action_exit">Exit profile</string>
+    <string name="action_share" translatable="false">Share</string>
+
+<!-- Preferences -->
+
+    <!-- Sync period -->
+    <string name="pref_period_key" transaltable="false" translatable="false">sync_period</string>
+    <string name="pref_period_label">Sync period (days)</string>
+    <string name="pref_period_default" translatable="false">1</string>
+
+    <!-- Notifications -->
+    <string name="pref_show_notifications_key" transaltable="false" translatable="false">show_notifications</string>
+    <string name="pref_show_notifications_default" translatable="false">true</string>
+    <string name="pref_show_notifications_label">Show notifications after updates</string>
+
+
+
+<!-- Provider -->
+    <string name="provider_authorities" transaltable="false" translatable="false">ru.guu.my.myguuru</string>
+
+
+<!-- Account type (for sync-adapter authenticator) -->
+    <!-- SyncAdapter related -->
+    <string name="sync_account_type">my.guu.ru</string>
+    <string name="content_authority">ru.guu.my.myguuru</string>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+	<style name="TimetableListStyle">
+		<item name="android:choiceMode">singleChoice</item>
+	</style>
+</resources>

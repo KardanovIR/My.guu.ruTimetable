@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My.guu.ru Расписание</string>
+    <string name="action_exit">Выйти из профиля</string>
+    <string name="action_logout">Выйти из профиля</string>
+    <string name="action_settings">Настройки</string>
+    <string name="hello_world">Привет, мир!</string>
+    <string name="login_button_label">Проверка данных аккаунта...</string>
+    <string name="pref_period_label">Период синхронизации (дней)</string>
+    <string name="pref_show_notifications_label">Показывать уведомления после обновлений</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="title_activity_detail">Детальная информация</string>
+    <string name="title_activity_simple_scanner">Скнировать QR для авторизации</string>
+    <string name="title_activity_timetable">Расписание</string>
+</resources>
