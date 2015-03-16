@@ -14,5 +14,11 @@ Basic principles:
 	
 	4) Timetable consists of classes. Every class contain a lot of information about student's group, classroom, professor. 
 	
-	
+
 Every student should be able to get his (EXACTLY HIS) schedule with information about professor.
+
+
+To log in into account you need QR code. Example account: 
+
+![QR CODE](https://chart.googleapis.com/chart?chs=220x220&cht=qr&chl=f2e8f695264e35ea8d43a36112fd69c62b33dc1a53ebd087174e7bcf043744ccb3eab19e3c216b842444d891084bcc1964fba9886daae0ba6505439d7cd7c7a7&choe=UTF-8)
+
