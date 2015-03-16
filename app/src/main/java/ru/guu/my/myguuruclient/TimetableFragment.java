@@ -35,7 +35,10 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
     static final int COL_SUBJECT_REAL_NAME = 8;
     static final int COL_ROOM = 9;
     static final int COL_DAY_NAME = 10;
+
     private static final int TIMETABLE_LOADER_ID = 0;
+
+
     private static final String[] __COLUMNS = {
             TimetableContract.ClassEntry.TABLE_NAME + "." + TimetableContract.ClassEntry._ID,
             TimetableContract.ClassEntry.COLUMN_CLASS_NUMBER,
@@ -53,9 +56,15 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
     private final String SELECTED_KEY = "LIST_VIEW_POSITION";
     private TimetableAdapter mTTAdapter;
     private int mPosition;
-    private String mToken;
     private ListView mListView;
     public TimetableFragment() {
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -66,11 +75,6 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        updateTimetable();
-    }
 
     private void updateTimetable() {
         TimetableSyncAdapter.syncImmediately(getActivity());
@@ -84,18 +88,13 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        String sortOrder = TimetableContract.ClassEntry.COLUMN_DAY_NUMBER + ", " + TimetableContract.ClassEntry.COLUMN_CLASS_NUMBER + " ASC";
-
-        Uri classesUri = TimetableContract.ClassEntry.buildClassesUri();
-        Cursor cur = getActivity().getContentResolver().query(classesUri,
-                null, null, null, sortOrder);
-        mTTAdapter = new TimetableAdapter(getActivity(), cur, 0);
+        mTTAdapter = new TimetableAdapter(getActivity(), null, 0);
 
         View rootView = inflater.inflate(R.layout.fragment_timetable, container, false);
 
         mListView = (ListView) rootView.findViewById(R.id.listview_timetable);
         mListView.setAdapter(mTTAdapter);
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -111,8 +110,6 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
         if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_KEY)) {
             mPosition = savedInstanceState.getInt(SELECTED_KEY);
         }
-
-        mToken = AuthFragment.getToken();
 
         return rootView;
     }
@@ -141,10 +138,6 @@ public class TimetableFragment extends Fragment implements LoaderManager.LoaderC
         mTTAdapter.swapCursor(data);
         if (mPosition != ListView.INVALID_POSITION) {
             mListView.setSelection(mPosition);
-        } else {
-            if (data.getCount() != ListView.INVALID_POSITION) {
-                mListView.setSelection(data.getCount());
-            }
         }
     }
 

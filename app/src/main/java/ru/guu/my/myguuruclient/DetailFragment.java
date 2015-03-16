@@ -236,6 +236,17 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         }
 
         protected void onPostExecute(Bitmap result) {
+            final int imgMaxHeight = 150;
+            final int imgMaxWidth = 300;
+            float ratioBitmap = (float) result.getWidth() / (float) result.getHeight();
+            float ratioMax = (float) imgMaxWidth / (float) imgMaxHeight;
+            int finalWidth = imgMaxWidth;
+            int finalHeight = imgMaxHeight;
+            if (ratioMax > 1) {
+                finalWidth = (int) ((float)imgMaxHeight * ratioBitmap);
+            } else {
+                finalHeight = (int) ((float)imgMaxWidth / ratioBitmap);
+            }
             Bitmap output = Bitmap.createBitmap(result.getWidth(),
                     result.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(output);
@@ -248,7 +259,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                     result.getHeight() / 2, result.getWidth() / 2, paint);
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
             canvas.drawBitmap(result, rect, rect, paint);
-
+            output = Bitmap.createScaledBitmap(output, finalWidth, finalHeight, true);
             bmImage.setImageBitmap(output);
         }
     }

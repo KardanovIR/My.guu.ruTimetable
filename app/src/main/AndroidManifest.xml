@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.guu.my.myguuruclient">
+    package="ru.guu.my.myguuruclient" >
 
     <!-- To read QR -->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -15,14 +15,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/TimetableTheme">
+            android:theme="@style/TimetableTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -30,7 +30,7 @@
             android:name=".SimpleScannerActivity"
             android:label="@string/title_activity_simple_scanner"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/ScannerTheme">
+            android:theme="@style/ScannerTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -38,11 +38,12 @@
         <activity
             android:name=".TimetableActivity"
             android:label="@string/title_activity_timetable"
-            android:theme="@style/TimetableTheme"></activity>
+            android:theme="@style/TimetableTheme" />
         <activity
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
-            android:parentActivityName=".TimetableActivity">
+            android:theme="@style/SettingsTheme"
+            android:parentActivityName=".TimetableActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.guu.my.myguuruclient.TimetableActivity" />
@@ -51,17 +52,18 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".TimetableActivity"
-            android:theme="@style/SettingsTheme">
+            android:theme="@style/SettingsTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.guu.my.myguuruclient.TimetableActivity" />
         </activity>
 
         <!-- SyncAdapter's dummy authentication service -->
-        <service android:name=".sync.TimetableAuthenticatorService">
+        <service android:name=".sync.TimetableAuthenticatorService" >
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
@@ -75,14 +77,25 @@
 
         <service
             android:name=".sync.TimetableSyncService"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
+
             <meta-data
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
+
+        <activity
+            android:name=".ProfessorActivity"
+            android:label="@string/title_activity_professor"
+            android:theme="@style/SettingsTheme"
+            android:parentActivityName=".DetailActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.guu.my.myguuruclient.DetailActivity" />
+        </activity>
     </application>
 
 </manifest>

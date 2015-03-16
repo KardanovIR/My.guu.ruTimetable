@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import ru.guu.my.myguuruclient.sync.TimetableSyncAdapter;
+
 
 public class TimetableActivity extends ActionBarActivity implements TimetableFragment.Callback {
 
@@ -29,7 +31,7 @@ public class TimetableActivity extends ActionBarActivity implements TimetableFra
         } else {
             getSupportActionBar().setElevation(0f);
         }
-
+        TimetableSyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override

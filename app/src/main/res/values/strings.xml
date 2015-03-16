@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
     <string name="app_name">My.guu.ru Timetable</string>
     <string name="hello_world">Hello world!</string>
 
@@ -26,8 +26,10 @@
 
     <!-- Notifications -->
     <string name="pref_show_notifications_key" transaltable="false" translatable="false">show_notifications</string>
-    <string name="pref_show_notifications_default" translatable="false">true</string>
     <string name="pref_show_notifications_label">Show notifications after updates</string>
+    <string name="pref_show_notifications_default" translatable="false">true</string>
+    <string name="pref_show_notifications_true">Enabled</string>
+    <string name="pref_show_notifications_false">Not Enabled</string>
 
 
     <!-- Provider -->
@@ -36,6 +38,21 @@
 
     <!-- Account type (for sync-adapter authenticator) -->
     <!-- SyncAdapter related -->
-    <string name="sync_account_type">my.guu.ru</string>
-    <string name="content_authority">ru.guu.my.myguuru</string>
+    <string name="sync_account_type" translatable="false">my.guu.ru</string>
+    <string name="content_authority" translatable="false">ru.guu.my.myguuru</string>
+    <string name="title_activity_professor">ProfessorActivity</string>
+    <string name="professor_name_label">Name</string>
+    <string name="professor_email_label">Email</string>
+    <string name="professor_role_label">Role</string>
+    <string name="professor_organizational_unit_label">Organizational unit</string>
+    <string name="professor_facebook_label">Facebook</string>
+
+    <!-- Notification Format -->
+    <string name="format_notification">
+    Timetable updated
+    </string>
+    <!-- Strings related to Notification preference -->
+    <string name="pref_last_notification">last_notification
+    </string>
+
 </resources>

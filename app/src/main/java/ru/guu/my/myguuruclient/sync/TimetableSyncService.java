@@ -11,21 +11,21 @@ import android.util.Log;
 public class TimetableSyncService extends Service {
 
     private static final Object sSyncAdapterLock = new Object();
-    private static TimetableSyncAdapter sSunshineSyncAdapter = null;
+    private static TimetableSyncAdapter sTimetableSyncAdapter = null;
 
 
     @Override
     public void onCreate() {
-        Log.d("Timetable", "onCreate - SunshineSyncService");
+        Log.d("Timetable", "onCreate - TimetbleSyncService");
         synchronized (sSyncAdapterLock) {
-            if (sSunshineSyncAdapter == null) {
-                sSunshineSyncAdapter = new TimetableSyncAdapter(getApplicationContext(), true);
+            if (sTimetableSyncAdapter == null) {
+                sTimetableSyncAdapter = new TimetableSyncAdapter(getApplicationContext(), true);
             }
         }
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return sTimetableSyncAdapter.getSyncAdapterBinder();
     }
 }

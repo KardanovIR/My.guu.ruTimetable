@@ -32,17 +32,6 @@ public class TimetableAdapter extends CursorAdapter {
         return view;
     }
 
-    private String convertCursorRowToUXFormat(Cursor cursor) {
-
-        return cursor.getString(TimetableFragment.COL_SUBJECT_REAL_NAME) +
-                " - " +
-                cursor.getString(TimetableFragment.COL_SUBJECT_REAL_NAME) + "-" +
-                cursor.getString(TimetableFragment.COL_SUBJECT_REAL_NAME) + " in " +
-                cursor.getString(TimetableFragment.COL_SUBJECT_REAL_NAME) + "-" +
-                cursor.getString(TimetableFragment.COL_SUBJECT_REAL_NAME);
-    }
-
-
     @Override
     public int getItemViewType(int position) {
         Cursor cursor = (Cursor) getItem(position);

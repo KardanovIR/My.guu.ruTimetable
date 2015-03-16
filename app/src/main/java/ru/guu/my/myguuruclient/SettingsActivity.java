@@ -17,20 +17,6 @@ public class SettingsActivity extends PreferenceActivity
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.pref_general);
-
-        // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
-        // updated when the preference changes.
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_period_key)));
-        //bindPreferenceSummaryToValue(findPreference(get(R.string.pref_show_notifications_key)));
-    }
-
-    private void bindPreferenceSummaryToValue(Preference preference) {
-        preference.setOnPreferenceChangeListener(this);
-
-        onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
     }
 
     @Override
