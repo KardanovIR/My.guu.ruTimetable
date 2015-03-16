@@ -186,7 +186,7 @@ public class AuthFragment extends Fragment {
 
         protected void onPostExecute(Boolean result) {
             if (result != null) {
-                if (result == true) {
+                if (result) {
                     startActivity(new Intent(getActivity(), TimetableActivity.class));
                     getActivity().finish();
                 } else {

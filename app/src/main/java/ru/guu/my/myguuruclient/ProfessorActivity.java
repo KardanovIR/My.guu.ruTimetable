@@ -1,6 +1,7 @@
 package ru.guu.my.myguuruclient;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -235,7 +237,13 @@ public class ProfessorActivity extends ActionBarActivity{
             if (filename.equals(TimetableContract.API_DEFAULT_AVATAR_URL)) {
                 mAvatarView.setImageResource(R.drawable.ic_action_person_white);
             } else {
-                new DownloadImageTask(mAvatarView)
+                Resources r = getResources();
+                final int imageHeightSizeInDp = 150;
+                final int imageWidthSizeInDp = 300;
+                float imageHeightSizeInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, imageHeightSizeInDp, r.getDisplayMetrics());
+                float imageWidthSizeInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, imageWidthSizeInDp, r.getDisplayMetrics());
+
+                new DownloadImageTask(mAvatarView, imageHeightSizeInPx, imageWidthSizeInPx)
                         .execute(TimetableContract.REMOTE_BASE_URL + professorAvatar);
             }
         }

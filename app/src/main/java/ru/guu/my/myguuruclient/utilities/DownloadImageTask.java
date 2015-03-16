@@ -18,14 +18,13 @@ import java.io.InputStream;
  */
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     private ImageView mBmImage;
-    private int mMaxWidth;
-    private int mMaxHeight;
+    private float mMaxWidth;
+    private float mMaxHeight;
 
 
-
-    public DownloadImageTask (ImageView bmImage, int maxWidth, int maxHeight) {
-        this.mMaxWidth = maxHeight;
-        this.mMaxHeight = maxWidth;
+    public DownloadImageTask (ImageView bmImage, float maxHeight, float maxWidth) {
+        this.mMaxWidth = maxWidth;
+        this.mMaxHeight = maxHeight;
         this.mBmImage = bmImage;
     }
 
@@ -49,8 +48,8 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
-        final int imgMaxHeight = mMaxHeight;
-        final int imgMaxWidth = mMaxWidth;
+        final int imgMaxHeight = (int) mMaxHeight;
+        final int imgMaxWidth = (int) mMaxWidth;
         float ratioBitmap = (float) result.getWidth() / (float) result.getHeight();
         float ratioMax = (float) imgMaxWidth / (float) imgMaxHeight;
         int finalWidth = imgMaxWidth;

@@ -21,6 +21,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -204,7 +205,13 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         if (filename.equals(TimetableContract.API_DEFAULT_AVATAR_URL)) {
             mAvatarView.setImageResource(R.drawable.ic_action_person);
         } else {
-            new DownloadImageTask(mAvatarView)
+            Resources r = getResources();
+            final int imageHeightSizeInDp = 100;
+            final int imageWidthSizeInDp = 250;
+            float imageHeightSizeInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, imageHeightSizeInDp, r.getDisplayMetrics());
+            float imageWidthSizeInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, imageWidthSizeInDp, r.getDisplayMetrics());
+
+            new DownloadImageTask(mAvatarView, imageHeightSizeInPx, imageWidthSizeInPx)
                     .execute(TimetableContract.REMOTE_BASE_URL + professorAvatar);
         }
         Resources res = getResources();
