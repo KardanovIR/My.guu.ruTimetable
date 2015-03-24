@@ -100,7 +100,7 @@ public class AuthFragment extends Fragment {
 
 
     public void showErrorToast(String text) {
-        Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActiviy, text, Toast.LENGTH_SHORT).show();
     }
 
 
