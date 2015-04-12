@@ -1,5 +1,6 @@
 package ru.guu.my.myguuruclient;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -80,6 +81,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     };
     private static String mClassDescriptionStr;
     ShareActionProvider mShareActionProvider;
+    private MenuItem mShareMenuItem;
     public Uri mUri;
     private ImageView mAvatarView;
     private TextView mSubjectNameTView;
@@ -122,12 +124,19 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        mClassDescriptionStr = null;
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         getLoaderManager().initLoader(DETAIL_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
     }
 
     private Intent createShareActionIntent() {
+        if (mClassDescriptionStr == null) return null;
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
@@ -138,11 +147,14 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.detailfragment, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_share);
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        mShareMenuItem = menu.findItem(R.id.action_share);
+
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(mShareMenuItem);
         if (mClassDescriptionStr != null) {
             mShareActionProvider.setShareIntent(createShareActionIntent());
+            mShareMenuItem.setVisible(true);
         } else {
+            mShareMenuItem.setVisible(false);
             Log.d("", "Share provider is null");
         }
     }
@@ -213,8 +225,14 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                 data.getString(COL_ROOM),
                 Utils.getTimeRange(data.getString(COL_START_TIME), data.getString(COL_FINISH_TIME))
                 );
-        if (mShareActionProvider != null) {
+
+        if (mShareMenuItem == null) return;
+
+        if (mClassDescriptionStr != null && mShareActionProvider != null) {
+            mShareMenuItem.setVisible(true);
             mShareActionProvider.setShareIntent(createShareActionIntent());
+        }else{
+            mShareMenuItem.setVisible(false);
         }
     }
 
@@ -225,7 +243,6 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         }
         return null;
     }
-
 
     public interface Callback {
         public void onProfessorClick(Uri professorUri);
